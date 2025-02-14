@@ -78,13 +78,13 @@ def get_historical_data(
     
     
     while date < end:
-        #Pulls data at 12-hour intervals from June 6, 2020 to current date as of running
-        #and organizes into dataframe
+        #Pulls data at defined intervals from start to end date
+        #and organizes into json files
         response = requests.get(url)
         if response.status_code == 200:
             odds = response.json()
             timestamp = date.strftime("%Y-%m-%d_%H-%M-%S")
-            filename = os.path.join(folder_name, f"odds_{timestamp}.json")
+            filename = os.path.join(folder_name, f"odds_{timestamp}_{sport}.json")
             with open(filename, "w") as file:
                 json.dump(odds, file, indent=4)
             
